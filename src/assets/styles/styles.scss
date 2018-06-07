@@ -1,0 +1,22 @@
+$primary-color: rgb(255, 72, 0);
+$header-font-color: rgb(255, 255, 255);
+$header-font-type: Roboto, sans-serif, Arial;
+
+$body-font-type: Open-Sans, sans-serif, Arial;
+
+body {
+    background: rgba(204, 204, 204, 0.15);
+}
+
+.main-title {
+    text-align: center;
+    margin: auto;
+    color: $header-font-color;
+    font-family: $header-font-type;
+    background-color: $primary-color;
+    border-radius: 5px;
+}
+
+p {
+    font-family: $body-font-type;
+}

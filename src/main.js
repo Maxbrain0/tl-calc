@@ -2,6 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import 'typeface-open-sans'
+import 'typeface-roboto'
+
+import './assets/styles/styles.scss'
+
 Vue.config.productionTip = false
 
 new Vue({

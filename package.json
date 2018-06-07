@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "typeface-open-sans": "0.0.54",
+    "typeface-roboto": "0.0.54",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
   },

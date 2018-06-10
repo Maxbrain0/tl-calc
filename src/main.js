@@ -1,11 +1,10 @@
 import Vue from 'vue'
+import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 
-import 'typeface-open-sans'
-import 'typeface-roboto'
+import './assets/styles/theme.scss'
 
-import './assets/styles/styles.scss'
 
 Vue.config.productionTip = false
 

@@ -1,3 +1,21 @@
 .toolbar-title {
+    // override default of left-alingned title
     margin: auto;
 }
+
+.diagram {
+    margin-top: 15px;
+    margin-bottom: 10px;
+
+    h2 {
+        margin-bottom: 10px;
+    }
+}
+
+img {
+    width: 100%;
+    margin: auto;
+    max-height: 520px;
+}
+
+

@@ -12,26 +12,30 @@
             v-model="tlType"
             label="Transmission Line Type"
             single-line
+            color="secondary"
           ></v-select>
         </v-flex>
         </v-layout>
-        <v-layout row wrap justify-center>
-          <v-flex xs12 sm10 lg6>
-            {{ tlType }}
-          </v-flex>
-        </v-layout>
+         <component :is="tlType"></component> 
       </v-container>
     </v-app>
   </div>
 </template>
 
 <script>
+import Coax from './components/Coax.vue';
+import Microstrip from './components/Microstrip.vue';
 export default {
+  
   data() {
     return {
-      tlItems: ['Coax', 'Microstrip', 'Stripline', 'Coplanar Waveguide', 'Grounded Coplanar Waveguide'],
-      tlType: ''
+      tlItems: ['Coax', 'Microstrip'],
+      tlType: 'Coax'
     };
+  },
+  components: {
+    Microstrip,
+    Coax
   }
 }
 </script>

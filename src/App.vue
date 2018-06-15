@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <v-toolbar dark color="primary">
-        <h1 class="toolbar-title title">Transmission Line Calculator</h1>
+        <h1 class="toolbar-title title">Line Impedance Calculator</h1>
       </v-toolbar>
       <v-container>
         <v-layout justify-center>
@@ -16,7 +16,10 @@
           ></v-select>
         </v-flex>
         </v-layout>
-         <component :is="tlType"></component> 
+        <keep-alive>
+          <component :is="tlType"></component> 
+        </keep-alive>
+         
       </v-container>
     </v-app>
   </div>

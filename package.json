@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "material-components-web": "^0.36.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

@@ -14,6 +14,7 @@
             required
             class="tl-params"
             hint="Inner Coaxial Radius"
+            :rules="[rules.ratio1]"
           ></v-text-field>
           <v-text-field
             v-model.number="r2"
@@ -22,6 +23,7 @@
             required
             class="tl-params"
             hint="Outer Coaxial Radius"
+            :rules="[rules.ratio2]"
           ></v-text-field>
           <v-text-field
             v-model.number="eps_r"
@@ -53,7 +55,10 @@ export default {
       r2: 3.35,
       eps_r: 2.1,
       //lineImpedance: 50
-
+      rules: {
+        ratio1: () => (this.r2 > this.r1) || 'R1 must be less than R2',
+        ratio2: () => (this.r2 > this.r1) || 'R2 must be greater than R1'
+      }
     }
   },
   //cannot use arrow functions in watch or debounce as this will note be defined

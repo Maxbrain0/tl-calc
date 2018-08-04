@@ -47,41 +47,51 @@
 </template>
 
 <script>
-//import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 export default {
   data() {
     return {
-      r1: 1,
+      r1: 1.5,
       r2: 3.35,
       eps_r: 2.1,
-      //lineImpedance: 50
+      lineImpedance: 50,
       rules: {
         ratio1: () => (this.r2 > this.r1) || 'R1 must be less than R2',
         ratio2: () => (this.r2 > this.r1) || 'R2 must be greater than R1'
       }
     }
   },
-  //cannot use arrow functions in watch or debounce as this will note be defined
-  // watch: {
-  //   r1: function() {
-  //     this.getLineImpedance();
-  //   },
-  //   r2: function() {
-  //     this.getLineImpedance();
-  //   },
-  //   eps_r: function() {
-  //     this.getLineImpedance();
-  //   }
-  // },
-  // methods: {
-  //   getLineImpedance: debounce(function() {
-  //     this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
-  //   },1000)
-  // }
-  computed: {
-    lineImpedance() {
-      return ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
-    } 
-  }  
+  //cannot use arrow functions in watch or debounce as *this* will not be defined
+  watch: {
+    r1: function() {
+      console.log('Changed r1');
+      this.debouncedLineImpedance();
+    },
+    r2: function() {
+      console.log('Changed r2');
+      this.debouncedLineImpedance();
+    },
+    eps_r: function() {
+      console.log('Changed eps_r');
+      this.debouncedLineImpedance();
+    }
+  },
+  created() {
+    this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+  },
+  methods: {
+    debouncedLineImpedance: debounce(function() {
+      console.log('Debounce FTW!');
+      this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+    },350)
+    // getLineImpedance() { 
+    //   this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+    // }    
+  }
+  // computed: {
+  //   lineImpedance() {
+  //     return ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+  //   } 
+  // }  
 }
 </script>

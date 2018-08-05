@@ -9,12 +9,14 @@
         <v-form>
           <v-text-field
             v-model.number=r1
+            v-validate="'required'"
             label="R1"
             type="number"
             required
             class="tl-params"
             hint="Inner Coaxial Radius"
-            :rules="[rules.ratio1]"
+            data-vv-name="r1"
+            :error-messages="errors.collect('r1')"
           ></v-text-field>
           <v-text-field
             v-model.number="r2"
@@ -32,6 +34,7 @@
             required
             class="tl-params"
             hint="Dielectric Constant of Insulator"
+            :rules="[rules.dielectric]"
           ></v-text-field>
           <v-text-field 
             :value="lineImpedance"
@@ -57,22 +60,20 @@ export default {
       lineImpedance: 50,
       rules: {
         ratio1: () => (this.r2 > this.r1) || 'R1 must be less than R2',
-        ratio2: () => (this.r2 > this.r1) || 'R2 must be greater than R1'
+        ratio2: () => (this.r2 > this.r1) || 'R2 must be greater than R1',
+        dielectric: () => (this.eps_r >= 1) || 'The dielectric constant must be greater than or equal to 1'
       }
     }
   },
   //cannot use arrow functions in watch or debounce as *this* will not be defined
   watch: {
     r1: function() {
-      console.log('Changed r1');
       this.debouncedLineImpedance();
     },
     r2: function() {
-      console.log('Changed r2');
       this.debouncedLineImpedance();
     },
     eps_r: function() {
-      console.log('Changed eps_r');
       this.debouncedLineImpedance();
     }
   },
@@ -81,7 +82,6 @@ export default {
   },
   methods: {
     debouncedLineImpedance: debounce(function() {
-      console.log('Debounce FTW!');
       this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
     },350)
     // getLineImpedance() { 

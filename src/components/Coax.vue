@@ -15,7 +15,6 @@
             required
             class="tl-params"
             hint="Inner Coaxial Radius"
-            data-vv-name="r1"
             :error-messages="errors.collect('r1')"
           ></v-text-field>
           <v-text-field
@@ -54,7 +53,7 @@ import debounce from 'lodash.debounce';
 export default {
   data() {
     return {
-      r1: 1.5,
+      r1: 1,
       r2: 3.35,
       eps_r: 2.1,
       lineImpedance: 50,
@@ -78,11 +77,14 @@ export default {
     }
   },
   created() {
-    this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+    this.getImpedance();
   },
   methods: {
-    debouncedLineImpedance: debounce(function() {
+    getImpedance() {
       this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+    },
+    debouncedLineImpedance: debounce(function() {
+      this.getImpedance();
     },350)
     // getLineImpedance() { 
     //   this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);

@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     getImpedance() {
-      this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
+      this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1));
     },
     debouncedLineImpedance: debounce(function() {
       this.getImpedance();

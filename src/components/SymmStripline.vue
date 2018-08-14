@@ -24,6 +24,14 @@
             hint="Substrate Height"
           ></v-text-field>
           <v-text-field
+            v-model.number="thickness"
+            label="Substrate Height, H"
+            type="number"
+            required
+            class="tl-params"
+            hint="Substrate Height"
+          ></v-text-field>
+          <v-text-field
             v-model.number="eps_r"
             label="ε_r"
             type="number"
@@ -51,6 +59,7 @@ export default {
     return {
       width: 3,
       height: 1.524,
+      thickness: 0.1,
       eps_r: 4.1,
       lineImpedance: 50,
     }
@@ -72,10 +81,12 @@ export default {
   },
   methods: {
     getImpedance() {
-      
+      this.lineImpedance = 60/Math.sqrt(this.eps_r) * 
+      Math.log((1.9*(2*this.height+this.thickness))/(0.8*this.width+this.thickness));
+      this.lineImpedance = this.lineImpedance.toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
-      
+      this.getImpedance();
     },350)
   }
   

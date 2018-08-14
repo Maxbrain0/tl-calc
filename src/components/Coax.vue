@@ -9,13 +9,11 @@
         <v-form>
           <v-text-field
             v-model.number=r1
-            v-validate="'required'"
             label="R1"
             type="number"
             required
             class="tl-params"
             hint="Inner Coaxial Radius"
-            :error-messages="errors.collect('r1')"
           ></v-text-field>
           <v-text-field
             v-model.number="r2"
@@ -24,7 +22,6 @@
             required
             class="tl-params"
             hint="Outer Coaxial Radius"
-            :rules="[rules.ratio2]"
           ></v-text-field>
           <v-text-field
             v-model.number="eps_r"
@@ -33,7 +30,6 @@
             required
             class="tl-params"
             hint="Dielectric Constant of Insulator"
-            :rules="[rules.dielectric]"
           ></v-text-field>
           <v-text-field 
             :value="lineImpedance"
@@ -42,6 +38,7 @@
             style="font-weight:bold"
             readonly
             type="number"
+           
           ></v-text-field>
         </v-form>
       </v-flex>      

@@ -19,7 +19,6 @@
         <keep-alive>
           <component :is="tlType"></component> 
         </keep-alive>
-         
       </v-container>
     </v-app>
   </div>
@@ -28,17 +27,20 @@
 <script>
 import Coax from './components/Coax.vue';
 import Microstrip from './components/Microstrip.vue';
+import Stripline from './components/SymmStripline.vue';
+
 export default {
   
   data() {
     return {
-      tlItems: ['Coax', 'Microstrip'],
+      tlItems: ['Coax', 'Microstrip','Stripline'],
       tlType: 'Coax'
     };
   },
   components: {
+    Coax,
     Microstrip,
-    Coax
+    Stripline
   }
 }
 </script>

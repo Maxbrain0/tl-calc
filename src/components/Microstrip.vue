@@ -9,7 +9,6 @@
         <v-form>
           <v-text-field
             v-model.number="width"
-            v-validate="'required'"
             label="Trace Width, W"
             type="number"
             required
@@ -102,6 +101,8 @@ export default {
         (Math.sqrt(this.eps_eff) * 
         (this.width/this.height + 1.393 + 2.0/3.0 * Math.log(this.width/this.height+1.4444))));
       }
+      this.eps_eff = this.eps_eff.toFixed(2);
+      this.lineImpedance = this.lineImpedance.toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
       this.setEff();

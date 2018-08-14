@@ -57,9 +57,9 @@ import debounce from 'lodash.debounce';
 export default {
   data() {
     return {
-      width: 4,
-      height: 3.35,
-      eps_r: 2.1,
+      width: 3,
+      height: 1.524,
+      eps_r: 4.1,
       lineImpedance: 50,
       eps_eff: 2.1
     }

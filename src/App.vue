@@ -9,6 +9,8 @@
           <v-flex xs10 sm8 lg6>
            <v-select
             :items="tlItems"
+            item-text="name"
+            item-value="component"
             v-model="tlType"
             label="Transmission Line Type"
             single-line
@@ -27,20 +29,24 @@
 <script>
 import Coax from './components/Coax.vue';
 import Microstrip from './components/Microstrip.vue';
-import Stripline from './components/SymmStripline.vue';
+import SymmStripline from './components/SymmStripline.vue';
 
 export default {
   
   data() {
     return {
-      tlItems: ['Coax', 'Microstrip','Stripline'],
+      tlItems: [
+        {name: 'Coax', component: 'Coax'},
+        {name: 'Microstrip', component: 'Microstrip'},
+        {name: 'Symmetric Stripline', component: 'SymmStripline'}
+      ],
       tlType: 'Coax'
     };
   },
   components: {
     Coax,
     Microstrip,
-    Stripline
+    SymmStripline
   }
 }
 </script>

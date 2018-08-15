@@ -30,6 +30,8 @@
 import Coax from './components/Coax.vue';
 import Microstrip from './components/Microstrip.vue';
 import SymmStripline from './components/SymmStripline.vue';
+import CPW from './components/CPW.vue';
+import GCPW from './components/GCPW.vue';
 
 export default {
   
@@ -38,7 +40,9 @@ export default {
       tlItems: [
         {name: 'Coax', component: 'Coax'},
         {name: 'Microstrip', component: 'Microstrip'},
-        {name: 'Symmetric Stripline', component: 'SymmStripline'}
+        {name: 'Symmetric Stripline', component: 'SymmStripline'},
+        {name: 'Coplanar Waveguide', component: 'CPW'},
+        {name: 'Grounded Coplanar Waveguide', component: 'GCPW'},
       ],
       tlType: 'Coax'
     };
@@ -46,7 +50,9 @@ export default {
   components: {
     Coax,
     Microstrip,
-    SymmStripline
+    SymmStripline,
+    CPW,
+    GCPW
   }
 }
 </script>

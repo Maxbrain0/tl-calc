@@ -2,7 +2,7 @@
     <v-layout row wrap justify-center> 
       <v-flex xs12 class="diagram">
         <h2 class="text-xs-center">Diagram</h2>
-        <img src="../assets/coaxcable.svg" alt="">
+        <img src="../assets/diagrams/coax.png" alt="Coax Diagram">
       </v-flex>
       <v-flex xs12>
         <h2 class="text-xs-center">Parameters</h2>

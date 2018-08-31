@@ -16,6 +16,14 @@
             hint="Microstrip Trace Width"
           ></v-text-field>
           <v-text-field
+            v-model.number="thickness"
+            label="Trace Thickness, T"
+            type="number"
+            required
+            class="tl-params"
+            hint="Microstrip Trace Thickness"
+          ></v-text-field>
+          <v-text-field
             v-model.number="height"
             label="Substrate Height, H"
             type="number"
@@ -36,17 +44,13 @@
             label="Calculated Effective Dielectric Constant"
             class="tl-params"
             style="font-weight:bold"
-            readonly
-            type="number"
-          ></v-text-field>
+            readonly></v-text-field>
           <v-text-field 
             :value="lineImpedance"
             label="Calculated Line Impedance"
             class="tl-params"
             style="font-weight:bold"
-            readonly
-            type="number"
-          ></v-text-field>
+            readonly></v-text-field>
         </v-form>
       </v-flex>      
     </v-layout>
@@ -54,11 +58,13 @@
 
 <script>
 import debounce from 'lodash.debounce';
+import { microstrip } from '../js/impedanceCalcs';
 export default {
   data() {
     return {
-      width: 3,
+      width: 2.92,
       height: 1.524,
+      thickness: 0.1,
       eps_r: 4.1,
       lineImpedance: 50,
       eps_eff: 2.1
@@ -72,40 +78,23 @@ export default {
     height: function() {
       this.debouncedLineImpedance();
     },
+     thickness: function() {
+      this.debouncedLineImpedance();
+    },
     eps_r: function() {
       this.debouncedLineImpedance();
     }
   },
   created() {
-    this.setEff();
     this.getImpedance();
   },
   methods: {
-    setEff() {
-      // compute and set the effective dielectric constant
-      if(this.width <= this.height) {
-      this.eps_eff = ((this.eps_r+1)/2+(this.eps_r-1)/2 *
-        ((1/Math.sqrt(1+12*this.height/this.width)) 
-        + 0.04 * Math.pow((1-this.width/this.height),2)));
-      } else {
-        this.eps_eff = ((this.eps_r+1)/2+(this.eps_r-1)/2 *
-          ((1/Math.sqrt(1+12*this.height/this.width))));
-      }
-    },
     getImpedance() {
-      if(this.width <= this.height) {
-        this.lineImpedance = (60/Math.sqrt(this.eps_eff) 
-        * Math.log(8*this.height/this.width+0.25*this.width/this.height));
-      } else {
-        this.lineImpedance = (120*Math.PI / 
-        (Math.sqrt(this.eps_eff) * 
-        (this.width/this.height + 1.393 + 2.0/3.0 * Math.log(this.width/this.height+1.4444))));
-      }
-      this.eps_eff = this.eps_eff.toFixed(2);
-      this.lineImpedance = this.lineImpedance.toFixed(2);
+      const values = microstrip(this.width, this.height, this.thickness, this.eps_r);
+      this.eps_eff = values.eps_eff.toFixed(2);
+      this.lineImpedance = values.z0.toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
-      this.setEff();
       this.getImpedance();
     },350)
   }

@@ -1,6 +1,6 @@
 <template>
     <v-layout row wrap justify-center> 
-       <v-flex xs12 class="diagram">
+      <v-flex xs12 class="diagram">
         <h2 class="text-xs-center">Diagram</h2>
         <img src="../assets/diagrams/GCPW.png" alt="Coax Diagram">
       </v-flex>
@@ -8,12 +8,20 @@
         <h2 class="text-xs-center">Parameters</h2>
         <v-form>
           <v-text-field
-            v-model.number="width"
-            label="Trace Width, W"
+            v-model.number="center"
+            label="Center Trace Width, S"
             type="number"
             required
             class="tl-params"
             hint="Microstrip Trace Width"
+          ></v-text-field>
+          <v-text-field
+            v-model.number="gap"
+            label="Gap, W"
+            type="number"
+            required
+            class="tl-params"
+            hint="Substrate Height"
           ></v-text-field>
           <v-text-field
             v-model.number="height"
@@ -53,22 +61,23 @@
 </template>
 
 <script>
+//import debounce from 'lodash.debounce';
+import { gcpw } from '../js/impedanceCalcs';
 export default {
   data() {
     return {
-      width: 3,
-      height: 1.524,
-      eps_r: 4.1,
+      center: 1.2,
+      gap: 1,
+      height: 1.5,
+      eps_r: 10,
       lineImpedance: 50,
       eps_eff: 2.1
     }
   },
   //cannot use arrow functions in watch or debounce as *this* will not be defined
-  watch: {
-  },
   created() {
+    const test = gcpw(this.center, this.gap, this.height, this.eps_r);
+    console.log(test);
   },
-  methods: {
-  }
 }
 </script>

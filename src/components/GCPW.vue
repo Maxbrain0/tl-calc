@@ -44,17 +44,13 @@
             label="Calculated Effective Dielectric Constant"
             class="tl-params"
             style="font-weight:bold"
-            readonly
-            type="number"
-          ></v-text-field>
+            readonly></v-text-field>
           <v-text-field 
             :value="lineImpedance"
             label="Calculated Line Impedance"
             class="tl-params"
             style="font-weight:bold"
-            readonly
-            type="number"
-          ></v-text-field>
+            readonly></v-text-field>
         </v-form>
       </v-flex>      
     </v-layout>

@@ -58,6 +58,7 @@
 
 <script>
 import debounce from 'lodash.debounce';
+import { microstrip } from '../js/impedanceCalcs';
 export default {
   data() {
     return {
@@ -82,35 +83,13 @@ export default {
     }
   },
   created() {
-    this.setEff();
     this.getImpedance();
   },
   methods: {
-    setEff() {
-      // compute and set the effective dielectric constant
-      if(this.width <= this.height) {
-      this.eps_eff = ((this.eps_r+1)/2+(this.eps_r-1)/2 *
-        ((1/Math.sqrt(1+12*this.height/this.width)) 
-        + 0.04 * Math.pow((1-this.width/this.height),2)));
-      } else {
-        this.eps_eff = ((this.eps_r+1)/2+(this.eps_r-1)/2 *
-          ((1/Math.sqrt(1+12*this.height/this.width))));
-      }
-    },
     getImpedance() {
-      if(this.width <= this.height) {
-        this.lineImpedance = (60/Math.sqrt(this.eps_eff) 
-        * Math.log(8*this.height/this.width+0.25*this.width/this.height));
-      } else {
-        this.lineImpedance = (120*Math.PI / 
-        (Math.sqrt(this.eps_eff) * 
-        (this.width/this.height + 1.393 + 2.0/3.0 * Math.log(this.width/this.height+1.4444))));
-      }
-      this.eps_eff = this.eps_eff.toFixed(2);
-      this.lineImpedance = this.lineImpedance.toFixed(2);
+      microstrip(this.width, this.height, this.thickness, this.eps_r);
     },
     debouncedLineImpedance: debounce(function() {
-      this.setEff();
       this.getImpedance();
     },350)
   }

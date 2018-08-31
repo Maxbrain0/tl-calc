@@ -61,5 +61,9 @@ export function gcpw(s, w, h, eps_r) {
   };
 }
 
-export default { cpw , gcpw};
+export function coax(r1,r2, eps_r) {
+  return (138 / Math.sqrt(eps_r) * Math.log10(r2 / r1));
+}
+
+export default { cpw , gcpw, coax};
 

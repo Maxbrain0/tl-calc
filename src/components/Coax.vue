@@ -38,7 +38,6 @@
             style="font-weight:bold"
             readonly
             type="number"
-           
           ></v-text-field>
         </v-form>
       </v-flex>      
@@ -47,6 +46,7 @@
 
 <script>
 import debounce from 'lodash.debounce';
+import { coax } from '../js/impedanceCalcs';
 export default {
   data() {
     return {
@@ -78,20 +78,11 @@ export default {
   },
   methods: {
     getImpedance() {
-      this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1))
-      .toFixed(2);
+      this.lineImpedance = coax(this.r1, this.r2, this.eps_r).toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
       this.getImpedance();
-    },350)
-    // getLineImpedance() { 
-    //   this.lineImpedance = ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
-    // }    
+    },350) 
   }
-  // computed: {
-  //   lineImpedance() {
-  //     return ((138/Math.sqrt(this.eps_r))*Math.log10(this.r2/this.r1)).toFixed(2);
-  //   } 
-  // }  
 }
 </script>

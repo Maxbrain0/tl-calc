@@ -61,7 +61,7 @@
 </template>
 
 <script>
-//import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 import { gcpw } from '../js/impedanceCalcs';
 export default {
   data() {
@@ -74,10 +74,32 @@ export default {
       eps_eff: 2.1
     }
   },
-  //cannot use arrow functions in watch or debounce as *this* will not be defined
   created() {
-    const test = gcpw(this.center, this.gap, this.height, this.eps_r);
-    console.log(test);
+    this.getImpedace();
   },
+  watch: {
+    center: function() {
+      this.debouncedLineImpedance();
+    },
+    gap: function() {
+      this.debouncedLineImpedance();
+    },
+    height: function() {
+      this.debouncedLineImpedance();
+    },
+    eps_r: function() {
+      this.debouncedLineImpedance();
+    }
+  },
+  methods: {
+    getImpedace() {
+      const values = gcpw(this.center, this.gap, this.height, this.eps_r);
+      this.lineImpedance = values.z0.toFixed(2);
+      this.eps_eff = values.eps_eff.toFixed(2);
+    },
+    debouncedLineImpedance: debounce(function() {
+      this.getImpedace();
+    },350)
+  }
 }
 </script>

@@ -21,7 +21,7 @@
             type="number"
             required
             class="tl-params"
-            hint="Substrate Height"
+            hint="Gap between trace and ground"
           ></v-text-field>
           <v-text-field
             v-model.number="height"

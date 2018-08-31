@@ -16,6 +16,14 @@
             hint="Microstrip Trace Width"
           ></v-text-field>
           <v-text-field
+            v-model.number="thickness"
+            label="Trace Thickness, T"
+            type="number"
+            required
+            class="tl-params"
+            hint="Microstrip Trace Thickness"
+          ></v-text-field>
+          <v-text-field
             v-model.number="height"
             label="Substrate Height, H"
             type="number"

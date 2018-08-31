@@ -62,7 +62,7 @@ import { microstrip } from '../js/impedanceCalcs';
 export default {
   data() {
     return {
-      width: 3,
+      width: 2.92,
       height: 1.524,
       thickness: 0.1,
       eps_r: 4.1,
@@ -90,7 +90,9 @@ export default {
   },
   methods: {
     getImpedance() {
-      microstrip(this.width, this.height, this.thickness, this.eps_r);
+      const values = microstrip(this.width, this.height, this.thickness, this.eps_r);
+      this.eps_eff = values.eps_eff.toFixed(2);
+      this.lineImpedance = values.z0.toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
       this.getImpedance();

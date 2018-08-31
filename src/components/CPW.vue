@@ -8,12 +8,20 @@
         <h2 class="text-xs-center">Parameters</h2>
         <v-form>
           <v-text-field
-            v-model.number="width"
-            label="Trace Width, W"
+            v-model.number="center"
+            label="Center Trace Width, S"
             type="number"
             required
             class="tl-params"
             hint="Microstrip Trace Width"
+          ></v-text-field>
+          <v-text-field
+            v-model.number="gap"
+            label="Gap, W"
+            type="number"
+            required
+            class="tl-params"
+            hint="Substrate Height"
           ></v-text-field>
           <v-text-field
             v-model.number="height"
@@ -54,19 +62,26 @@
 
 <script>
 import debounce from 'lodash.debounce';
+import { cpw } from '../js/impedanceCalcs';
 export default {
   data() {
     return {
-      width: 3,
-      height: 1.524,
-      eps_r: 4.1,
+      center: 1.5,
+      gap: 0.55,
+      height: 1.5,
+      eps_r: 10,
       lineImpedance: 50,
       eps_eff: 2.1
     }
   },
-  //cannot use arrow functions in watch or debounce as *this* will not be defined
+  created() {
+    this.getImpedace();
+  },
   watch: {
-    width: function() {
+    center: function() {
+      this.debouncedLineImpedance();
+    },
+    gap: function() {
       this.debouncedLineImpedance();
     },
     height: function() {
@@ -76,39 +91,15 @@ export default {
       this.debouncedLineImpedance();
     }
   },
-  created() {
-    this.setEff();
-    this.getImpedance();
-  },
   methods: {
-    setEff() {
-      // compute and set the effective dielectric constant
-      if(this.width <= this.height) {
-      this.eps_eff = ((this.eps_r+1)/2+(this.eps_r-1)/2 *
-        ((1/Math.sqrt(1+12*this.height/this.width)) 
-        + 0.04 * Math.pow((1-this.width/this.height),2)));
-      } else {
-        this.eps_eff = ((this.eps_r+1)/2+(this.eps_r-1)/2 *
-          ((1/Math.sqrt(1+12*this.height/this.width))));
-      }
-    },
-    getImpedance() {
-      if(this.width <= this.height) {
-        this.lineImpedance = (60/Math.sqrt(this.eps_eff) 
-        * Math.log(8*this.height/this.width+0.25*this.width/this.height));
-      } else {
-        this.lineImpedance = (120*Math.PI / 
-        (Math.sqrt(this.eps_eff) * 
-        (this.width/this.height + 1.393 + 2.0/3.0 * Math.log(this.width/this.height+1.4444))));
-      }
-      this.eps_eff = this.eps_eff.toFixed(2);
-      this.lineImpedance = this.lineImpedance.toFixed(2);
+    getImpedace() {
+      const values = cpw(this.center, this.gap, this.height, this.eps_r);
+      this.lineImpedance = values.z0.toFixed(2);
+      this.eps_eff = values.eps_eff.toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
-      this.setEff();
-      this.getImpedance();
+      this.getImpedace();
     },350)
   }
-  
 }
 </script>

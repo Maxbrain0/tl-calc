@@ -44,8 +44,7 @@
             label="Calculated Line Impedance"
             class="tl-params"
             style="font-weight:bold"
-            readonly
-            type="number"
+            readonly>
           ></v-text-field>
         </v-form>
       </v-flex>      
@@ -53,14 +52,14 @@
 </template>
 
 <script>
+import { stripline } from '../js/impedanceCalcs';
 import debounce from 'lodash.debounce';
 export default {
   data() {
     return {
-      width: 3,
-      height: 1.524,
-      subHeight: 1.524,
-      thickness: 0.1,
+      width: 1.4,
+      subHeight: 3.1,
+      thickness: 0,
       eps_r: 4.1,
       lineImpedance: 50,
     }
@@ -71,11 +70,9 @@ export default {
       this.debouncedLineImpedance();
     },
     subHeight: function() {
-      this.height = this.subHeight/2-this.thickness/2;
       this.debouncedLineImpedance();
     },
     thickness: function() {
-      this.height = this.subHeight/2-this.thickness/2;
       this.debouncedLineImpedance();
     },
     eps_r: function() {
@@ -87,9 +84,7 @@ export default {
   },
   methods: {
     getImpedance() {
-      this.lineImpedance = 60/Math.sqrt(this.eps_r) * 
-      Math.log((1.9*(2*this.height+this.thickness))/(0.8*this.width+this.thickness));
-      this.lineImpedance = this.lineImpedance.toFixed(2);
+      this.lineImpedance = stripline(this.width, this.subHeight, this.thickness, this.eps_r).toFixed(2);
     },
     debouncedLineImpedance: debounce(function() {
       this.getImpedance();

@@ -77,8 +77,27 @@ export function microstrip() {
   return 0;
 }
 
-export function stripline() {
-  return 0;
+/**
+ * Computes the lineImpedance of conductor-backed (grounded_ coplanar waveguide
+ * @param {number} w - The width of the center trace
+ * @param {number} h - total substrate thickness (not half, labelled 'b' in textbook
+ * @param {number} t - The gap between trace and ground planes
+ * @param {number} eps_r - relative permittivity of substrate
+ * 
+ * @returns {number} The line impedance of the coplanar waveguide
+ * 
+ * From Advanced Engineering Electrodynamics - Balanis - 8.8.1
+ */
+export function stripline(w, h, t, eps_r) {
+  const term1 = 30*Math.PI/Math.sqrt(eps_r);
+  const cp = (w/h) / (1 - t/h);
+  let cf = 0.4413; // for zero thickenss case
+  if (t != 0) {
+    cf = 1/Math.PI * ( 2/(1-t/h) * Math.log(1 + 1/(1-t/h))
+                - (1/(1-t/h) - 1) * Math.log(1/Math.pow(1-t/h, 2) - 1) );
+  }
+  
+  return term1 / (cp + cf);
 }
 
 export default { coax, cpw , gcpw, microstrip, stripline};

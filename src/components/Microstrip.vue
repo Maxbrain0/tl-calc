@@ -63,6 +63,7 @@ export default {
     return {
       width: 3,
       height: 1.524,
+      thickness: 0.1,
       eps_r: 4.1,
       lineImpedance: 50,
       eps_eff: 2.1

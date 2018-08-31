@@ -78,6 +78,9 @@ export default {
     height: function() {
       this.debouncedLineImpedance();
     },
+     thickness: function() {
+      this.debouncedLineImpedance();
+    },
     eps_r: function() {
       this.debouncedLineImpedance();
     }

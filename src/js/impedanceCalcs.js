@@ -73,8 +73,16 @@ export function gcpw(s, w, h, eps_r) {
   };
 }
 
-export function microstrip() {
-  return 0;
+export function microstrip(w, t, h, eps_r) {
+  const r = w/h; // trace width to sub height ratio
+  let r_eff = r; // effective trace width to sub heigh given trace thickness
+  
+  if (r < 0.5 / Math.PI) {
+    r_eff = 1;
+  } else {
+    r_eff = 1.1;
+  }
+  console.log(w, t, h, eps_r, r_eff);
 }
 
 /**

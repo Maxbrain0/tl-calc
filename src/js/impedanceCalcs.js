@@ -1,6 +1,18 @@
 import { ellipk } from './specialFunctions';
 
 /**
+ * Computes the characteristic impedance of a coaxial cross section
+ * @param {number} r1 - Radius of inner coax conductor
+ * @param {number} r2 - Radius of outer coax conductor
+ * @param {number} eps_r - relative permittivity of the insulator
+ * 
+ * @returns {number} The characteristic of the coplanar waveguide
+*/
+export function coax(r1,r2, eps_r) {
+  return (138 / Math.sqrt(eps_r) * Math.log10(r2 / r1));
+}
+
+/**
  * Computes the lineImpedance of coplanar waveguide with only upper ground plane
  * @param {number} s - The width of the center trace
  * @param {number} w - The gap between trace and ground planes
@@ -61,9 +73,13 @@ export function gcpw(s, w, h, eps_r) {
   };
 }
 
-export function coax(r1,r2, eps_r) {
-  return (138 / Math.sqrt(eps_r) * Math.log10(r2 / r1));
+export function microstrip() {
+  return 0;
 }
 
-export default { cpw , gcpw, coax};
+export function stripline() {
+  return 0;
+}
+
+export default { coax, cpw , gcpw, microstrip, stripline};
 

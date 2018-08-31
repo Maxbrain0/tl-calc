@@ -24,10 +24,10 @@ export function cpw(s, w, h, eps_r) {
 
   const z0 = 30*Math.PI / Math.sqrt(eps_eff) * ellipk(k0p) / ellipk(k0);
   
-  return {
+  return [
     z0,
     eps_eff
-  };
+  ];
 }
 
 /**
@@ -55,10 +55,10 @@ export function gcpw(s, w, h, eps_r) {
 
   const z0 = 60*Math.PI / Math.sqrt(eps_eff) * 1 / (ellipk(k)/ellipk(kp) + ellipk(k3)/ellipk(k3p));
   
-  return {
+  return [
     z0,
     eps_eff
-  };
+  ];
 }
 
 export default { cpw , gcpw};

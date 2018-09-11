@@ -1,9 +1,13 @@
 <template>
   <div id="app">
     <v-app>
-      <v-toolbar dark color="primary">
-        <h1 class="toolbar-title title">Line Impedance Calculator</h1>
-        <v-icon dark large>info</v-icon>
+      <v-toolbar class="toolbar" dark color="primary">
+        <v-toolbar-title>Line Impedance Calculator</v-toolbar-title>
+        <v-toolbar-items>
+          <v-btn flat>
+            <v-icon dark large>info</v-icon>
+          </v-btn>
+        </v-toolbar-items>
       </v-toolbar>
       <v-container>
         <v-layout justify-center>

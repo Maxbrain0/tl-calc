@@ -3,6 +3,7 @@
     <v-app>
       <v-toolbar dark color="primary">
         <h1 class="toolbar-title title">Line Impedance Calculator</h1>
+        <v-icon dark large>info</v-icon>
       </v-toolbar>
       <v-container>
         <v-layout justify-center>

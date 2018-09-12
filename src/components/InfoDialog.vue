@@ -12,21 +12,27 @@
 
     <v-card light>
       <v-card-title>
-        <div class="headline font-weight-medium j-title">About Me</div>
+        <div class="headline font-weight-medium j-title primary--text">About Me</div>
       </v-card-title>
 
       <v-card-text>
-        <div class="subheading font-weight-bold">
+        <div class="subheading font-weight-bold primary--text">
           Jacob Goodwin
         </div>
         <div class="body-2">
-          GitHub
+          <v-btn flat large color="primary" href="https://github.com/Maxbrain0" target="_blank"> 
+            <font-awesome-icon :icon="['fab','github']" size="3x" />
+          </v-btn>      
         </div>
         <div class="body-2">
-          LinkedIn
+          <v-btn flat large color="primary" href="https://www.linkedin.com/in/jacobgoodwin1/" target="_blank">
+            <font-awesome-icon :icon="['fab','linkedin']" size="3x" />
+          </v-btn>    
         </div>
         <div class="body-2">
-          Personal Blog
+          <v-btn flat large color="primary" href="https://www.jacobsngoodwin.com/" target="_blank">
+            <font-awesome-icon icon="globe" size="3x" />
+          </v-btn>  
         </div>
       </v-card-text>
 
@@ -59,6 +65,9 @@ export default {
 <style lang="scss" scoped>
   .j-title {
     margin: auto;
+  }
+  .body-2 {
+    padding: 1em 0;
   }
   .v-card__text {
     display: flex;

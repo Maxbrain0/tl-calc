@@ -6,7 +6,7 @@
         <v-toolbar-items>
           <v-dialog
             v-model="dialog"
-            width="500"
+            max-width="500"
           >
             <v-btn
               flat
@@ -17,7 +17,8 @@
 
             <v-card>
               <v-card-title
-                class="headline grey lighten-2"
+                class="headline"
+                color="primary"
                 primary-title
               >
                 Privacy Policy

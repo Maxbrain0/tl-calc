@@ -10,17 +10,24 @@
       <v-icon large>info</v-icon>
     </v-btn>
 
-    <v-card>
-      <v-card-title
-        class="headline"
-        color="primary"
-        primary-title
-      >
-        About Author
+    <v-card light>
+      <v-card-title>
+        <div class="headline font-weight-medium j-title">About Me</div>
       </v-card-title>
 
       <v-card-text>
-        Jacob is the boss, and you better believe it!
+        <div class="subheading font-weight-bold">
+          Jacob Goodwin
+        </div>
+        <div class="body-2">
+          GitHub
+        </div>
+        <div class="body-2">
+          LinkedIn
+        </div>
+        <div class="body-2">
+          Personal Blog
+        </div>
       </v-card-text>
 
       <v-divider></v-divider>
@@ -48,3 +55,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .j-title {
+    margin: auto;
+  }
+  .v-card__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0px;
+  }
+</style>

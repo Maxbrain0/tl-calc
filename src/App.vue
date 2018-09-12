@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <v-app>
-      <v-toolbar dark color="primary">
-        <h1 class="toolbar-title title">Line Impedance Calculator</h1>
+      <v-toolbar class="toolbar" dark color="primary">
+        <v-toolbar-title>Line Impedance Calculator</v-toolbar-title>
+        <v-toolbar-items>
+          <info-dialog></info-dialog>
+        </v-toolbar-items>
       </v-toolbar>
       <v-container>
         <v-layout justify-center>
@@ -32,6 +35,7 @@ import Microstrip from './components/Microstrip.vue';
 import SymmStripline from './components/SymmStripline.vue';
 import CPW from './components/CPW.vue';
 import GCPW from './components/GCPW.vue';
+import InfoDialog from './components/InfoDialog.vue';
 
 export default {
   
@@ -44,7 +48,8 @@ export default {
         {name: 'Coplanar Waveguide', component: 'CPW'},
         {name: 'Grounded Coplanar Waveguide', component: 'GCPW'},
       ],
-      tlType: 'Coax'
+      tlType: 'Coax',
+      dialog: false
     };
   },
   components: {
@@ -52,7 +57,8 @@ export default {
     Microstrip,
     SymmStripline,
     CPW,
-    GCPW
+    GCPW,
+    InfoDialog
   }
 }
 </script>

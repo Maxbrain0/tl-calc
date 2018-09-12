@@ -1,6 +1,9 @@
-.toolbar-title {
-    // override default of left-alingned title
-    margin: auto;
+.v-toolbar__content {
+  justify-content: center;
+}
+
+.v-toolbar__items {
+  align-items: center;
 }
 
 .diagram {

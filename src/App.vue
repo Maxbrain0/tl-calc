@@ -4,44 +4,7 @@
       <v-toolbar class="toolbar" dark color="primary">
         <v-toolbar-title>Line Impedance Calculator</v-toolbar-title>
         <v-toolbar-items>
-          <v-dialog
-            v-model="dialog"
-            max-width="500"
-          >
-            <v-btn
-              flat
-              slot="activator"
-            >
-              <v-icon large>info</v-icon>
-            </v-btn>
-
-            <v-card>
-              <v-card-title
-                class="headline"
-                color="primary"
-                primary-title
-              >
-                Privacy Policy
-              </v-card-title>
-
-              <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  color="primary"
-                  flat
-                  @click="dialog = false"
-                >
-                  I accept
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+          <info-dialog></info-dialog>
         </v-toolbar-items>
       </v-toolbar>
       <v-container>
@@ -72,6 +35,7 @@ import Microstrip from './components/Microstrip.vue';
 import SymmStripline from './components/SymmStripline.vue';
 import CPW from './components/CPW.vue';
 import GCPW from './components/GCPW.vue';
+import InfoDialog from './components/InfoDialog.vue';
 
 export default {
   
@@ -93,7 +57,8 @@ export default {
     Microstrip,
     SymmStripline,
     CPW,
-    GCPW
+    GCPW,
+    InfoDialog
   }
 }
 </script>
